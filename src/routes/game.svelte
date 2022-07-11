@@ -72,21 +72,17 @@
     function recursive_reveale(
         x: number,
         y: number,
-        visited: Array<{ x: number; y: number }>
+        visited: Array<Box>
     ) {
-        if (visited.some((i) => i.x == x && i.y === y)) return;
-        visited.push({ x, y });
+        if (visited.includes(intmap[y][x])) return;
+        visited.push(intmap[y][x]);
         if (intmap[y][x].value == -1) return;
         intmap[y][x].covered = false;
         if (intmap[y][x].value != 0) return;
-        if (x - 1 >= 0 && y - 1 >= 0) recursive_reveale(x - 1, y - 1, visited);
         if (x - 1 >= 0) recursive_reveale(x - 1, y, visited);
-        if (x - 1 >= 0 && y + 1 < height) recursive_reveale(x - 1, y + 1, visited);
         if (y - 1 >= 0) recursive_reveale(x, y - 1, visited);
         if (y + 1 < height) recursive_reveale(x, y + 1, visited);
-        if (x + 1 < width && y - 1 >= 0) recursive_reveale(x + 1, y - 1, visited);
         if (x + 1 < width) recursive_reveale(x + 1, y, visited);
-        if (x + 1 < width && y + 1 < height) recursive_reveale(x + 1, y + 1, visited);
     }
 
     function click(x: number, y: number) {
