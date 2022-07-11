@@ -1,0 +1,1 @@
+export type Box = {value: number, covered: boolean, marked: boolean}
