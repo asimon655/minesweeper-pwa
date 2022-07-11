@@ -81,18 +81,16 @@
         if (intmap[y][x].value != 0) return;
         if (x - 1 >= 0 && y - 1 >= 0) recursive_reveale(x - 1, y - 1, visited);
         if (x - 1 >= 0) recursive_reveale(x - 1, y, visited);
-        if (x - 1 >= 0 && y + 1 < height)
-            recursive_reveale(x - 1, y + 1, visited);
+        if (x - 1 >= 0 && y + 1 < height) recursive_reveale(x - 1, y + 1, visited);
         if (y - 1 >= 0) recursive_reveale(x, y - 1, visited);
         if (y + 1 < height) recursive_reveale(x, y + 1, visited);
-        if (x + 1 < width && y - 1 >= 0)
-            recursive_reveale(x + 1, y - 1, visited);
+        if (x + 1 < width && y - 1 >= 0) recursive_reveale(x + 1, y - 1, visited);
         if (x + 1 < width) recursive_reveale(x + 1, y, visited);
-        if (x + 1 < width && y + 1 < height)
-            recursive_reveale(x + 1, y + 1, visited);
+        if (x + 1 < width && y + 1 < height) recursive_reveale(x + 1, y + 1, visited);
     }
 
     function click(x: number, y: number) {
+        if (intmap[y][x].marked) return
         intmap[y][x].covered = false;
         if (intmap[y][x].value == -1) {
             game_over();
@@ -148,9 +146,11 @@
     table {
         margin: auto;
         /* border-collapse: collapse; */
+        background-color: darkgray;
     }
     td {
         padding: 0;
+        border-spacing: 0;
     }
     tr {
         padding: 0;
