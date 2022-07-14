@@ -54,18 +54,14 @@
 
     function calc_around(x: number, y: number): number {
         let count = 0;
-        if (x - 1 >= 0 && y - 1 >= 0 && intmap[y - 1][x - 1].value == -1)
-            count++;
+        if (x - 1 >= 0 && y - 1 >= 0 && intmap[y - 1][x - 1].value == -1) count++;
         if (x - 1 >= 0 && intmap[y][x - 1].value == -1) count++;
-        if (x - 1 >= 0 && y + 1 < height && intmap[y + 1][x - 1].value == -1)
-            count++;
+        if (x - 1 >= 0 && y + 1 < height && intmap[y + 1][x - 1].value == -1) count++;
         if (y - 1 >= 0 && intmap[y - 1][x].value == -1) count++;
         if (y + 1 < height && intmap[y + 1][x].value == -1) count++;
-        if (x + 1 < width && y - 1 >= 0 && intmap[y - 1][x + 1].value == -1)
-            count++;
+        if (x + 1 < width && y - 1 >= 0 && intmap[y - 1][x + 1].value == -1) count++;
         if (x + 1 < width && intmap[y][x + 1].value == -1) count++;
-        if (x + 1 < width && y + 1 < height && intmap[y + 1][x + 1].value == -1)
-            count++;
+        if (x + 1 < width && y + 1 < height && intmap[y + 1][x + 1].value == -1) count++;
         return count;
     }
 
@@ -79,10 +75,14 @@
         if (intmap[y][x].value == -1) return;
         intmap[y][x].covered = false;
         if (intmap[y][x].value != 0) return;
+        if (x - 1 >= 0 && y - 1 >= 0) recursive_reveale(x - 1, y -1, visited);
         if (x - 1 >= 0) recursive_reveale(x - 1, y, visited);
+        if (x - 1 >= 0 && y + 1 < height) recursive_reveale(x - 1, y + 1, visited);
         if (y - 1 >= 0) recursive_reveale(x, y - 1, visited);
         if (y + 1 < height) recursive_reveale(x, y + 1, visited);
+        if (x + 1 < height && y - 1 >= 0) recursive_reveale(x + 1, y - 1, visited);
         if (x + 1 < width) recursive_reveale(x + 1, y, visited);
+        if (x + 1 < width && y + 1 < height) recursive_reveale(x + 1, y + 1, visited);
     }
 
     function click(x: number, y: number) {
@@ -105,6 +105,13 @@
         return true;
     }
     function game_over() {
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+                if (intmap[y][x].value == -1) {
+                    intmap[y][x].covered = false
+                }
+            }
+        }
         alert("game over");
         game_on = false;
     }
