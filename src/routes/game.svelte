@@ -150,6 +150,7 @@
         margin: auto;
         /* border-collapse: collapse; */
         background-color: darkgray;
+        box-shadow: 0px 0px 9px 4px darkgrey;
     }
     td {
         padding: 0;
